@@ -3,6 +3,8 @@ PROJECT(OpenGL VERSION 0.0.0 LANGUAGES CXX)
 
 # The source files for the opengl graphics library
 set(GFX_SOURCES
+        src/opengl_standard_gfx.h
+        src/opengl_standard_gfx.cpp
 )
 
 # Creating the library itself
