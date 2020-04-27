@@ -8,6 +8,7 @@
 #define SUMMERGFX_GFX_H
 
 #include "defines.h"
+#include "exception.h"
 #include "interface.h"
 #include "camera.h"
 #include "font.h"

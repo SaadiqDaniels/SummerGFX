@@ -7,8 +7,7 @@
 #ifndef SUMMERGFX_VIEWPORT_H
 #define SUMMERGFX_VIEWPORT_H
 
-namespace operations::gfx
-{
+namespace operations::gfx {
 	class Viewport {
 	};
 }

@@ -7,8 +7,7 @@
 #ifndef SUMMERGFX_SHADER_H
 #define SUMMERGFX_SHADER_H
 
-namespace operations::gfx
-{
+namespace operations::gfx {
 	class Shader {
 	};
 }

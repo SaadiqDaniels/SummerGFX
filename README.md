@@ -40,7 +40,7 @@ The standardized operations that every implementation will provide includes:
     - Required for all renderable objects:
         - Mesh
         - Transformation matrix (column major)
-        - Standard camera object (see `standard/camera.h`)
+        - Standard camera object (see `standard/src/camera.h`)
     - Optional:
         - Viewport
 - Shader files:
