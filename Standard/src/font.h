@@ -7,8 +7,7 @@
 #ifndef SUMMERGFX_FONT_H
 #define SUMMERGFX_FONT_H
 
-namespace operations::gfx
-{
+namespace operations::gfx {
 	class Font {
 	};
 }

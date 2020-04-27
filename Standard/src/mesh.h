@@ -7,8 +7,7 @@
 #ifndef SUMMERGFX_MESH_H
 #define SUMMERGFX_MESH_H
 
-namespace operations::gfx
-{
+namespace operations::gfx {
 	class Mesh {
 	};
 }

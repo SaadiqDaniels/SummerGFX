@@ -7,8 +7,7 @@
 #ifndef SUMMERGFX_TEXTURE_H
 #define SUMMERGFX_TEXTURE_H
 
-namespace operations::gfx
-{
+namespace operations::gfx {
 	class Texture {
 	};
 }

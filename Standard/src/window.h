@@ -7,8 +7,7 @@
 #ifndef SUMMERGFX_WINDOW_H
 #define SUMMERGFX_WINDOW_H
 
-namespace operations::gfx
-{
+namespace operations::gfx {
 	class Window {
 	};
 }

@@ -7,9 +7,9 @@
 #ifndef SUMMERGFX_CAMERA_H
 #define SUMMERGFX_CAMERA_H
 
-namespace operations::gfx
-{
-
+namespace operations::gfx {
+	class Camera {
+	};
 }
 
 #endif // SUMMERGFX_CAMERA_H

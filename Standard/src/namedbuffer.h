@@ -7,8 +7,7 @@
 #ifndef SUMMERGFX_NAMEDBUFFER_H
 #define SUMMERGFX_NAMEDBUFFER_H
 
-namespace operations::gfx
-{
+namespace operations::gfx {
 	class NamedBuffer {
 	};
 }

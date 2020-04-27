@@ -4,6 +4,7 @@ PROJECT(Standard VERSION 0.0.1 LANGUAGES CXX)
 set(STANDARD_SOURCES
         "${CMAKE_CURRENT_SOURCE_DIR}/src/gfx.h"
         "${CMAKE_CURRENT_SOURCE_DIR}/src/defines.h"
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/exception.h"
         "${CMAKE_CURRENT_SOURCE_DIR}/src/interface.h"
         "${CMAKE_CURRENT_SOURCE_DIR}/src/camera.h"
         "${CMAKE_CURRENT_SOURCE_DIR}/src/font.h"
