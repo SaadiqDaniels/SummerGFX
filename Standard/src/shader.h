@@ -32,7 +32,7 @@ namespace operations::gfx {
 		 * 		It should be noted that calling this function with two string arguments will create a vertex/fragment
 		 * 		shader pair instead of a compute shader
 		 */
-		Shader(const char *compute);
+		explicit Shader(const char *compute);
 
 		/*!
 		 * @brief Creates a shader object with no data
@@ -47,34 +47,44 @@ namespace operations::gfx {
 		virtual ~Shader();
 
 		/*!
+		 * @brief Activates this shader program
+		 * @return gfx_fail if this shader cannot be activated,
+		 * data_fail if this is a default created shader
+		 */
+		virtual RV Use();
+
+		/*!
+		 * @brief Deactivates the shader program and no shader is selected
+		 * @return gfx_fail if the shader cannot be de-selected
+		 */
+		virtual RV Unuse();
+
+		/*!
 		 * @brief Finds a uniform (or similar object) from a shader that can later be set
 		 * @param name The name of the shader value to find
-		 * @return success if the value was found, gfx_fail if the value could not be found
+		 * @return success if the value was found,
+		 * gfx_fail if the value could not be found
+		 * data_fail if this is a default created shader
 		 */
-#ifdef GRAPHICS_BASE_CLASSES
-
-		virtual RV FindShaderValue(const char *name);
-
-#else
-		RV FindShaderValue(const char *name);
-#endif
-
+		virtual iddt FindShaderValue(const char *name);
 
 		/*!
 		 * @brief Sets a shader value in the program's memory
 		 * @param name The name of the variable to set
 		 * @param value The value to set
-		 * @return data_fail if the value provided is not valid, gfx_fail if the value could not be successfully set
+		 * @return data_fail if the value provided is not valid or this is a default shader,
+		 * gfx_fail if the value could not be successfully set
 		 */
-#ifdef GRAPHICS_BASE_CLASSES
-
 		virtual RV SetShaderValue(iddt name, float value);
 
 		virtual RV SetShaderValue(iddt name, int value);
 
-		virtual RV SetShaderValue(iddt name, float *value);
+		/*!
+		 * @param num The number of elements in the array
+		 */
+		virtual RV SetShaderValue(iddt name, float *value, int num);
 
-		virtual RV SetShaderValue(iddt name, int *value);
+		virtual RV SetShaderValue(iddt name, int *value, int num);
 
 		virtual RV SetShaderValue(iddt name, glm::vec2 &value);
 
@@ -82,34 +92,29 @@ namespace operations::gfx {
 
 		virtual RV SetShaderValue(iddt name, glm::vec4 &value);
 
+		/*!
+		 * @note The matrix values used in these functions are assumed to be column major, if the underlying graphics
+		 * library is expecting row major, the matrix will be transposed on this library's end
+		 */
 		virtual RV SetShaderValue(iddt name, glm::mat2 &value);
 
 		virtual RV SetShaderValue(iddt name, glm::mat3 &value);
 
 		virtual RV SetShaderValue(iddt name, glm::mat4 &value);
 
-#else
+		/*!
+		 * @brief Will bind this mesh to this shader
+		 * @param mesh The mesh to bind
+		 * @return data_fail if the mesh values were incorrect,
+		 * gfx_fail if the shader could not receive the mesh data
+		 * @note There must be a variable name in the shader that corresponds to the data in the mesh, if there is a
+		 * vertex array in the mesh, there must be a variable named "vertex" in the shader and so on
+		 */
+		RV BindMesh(Mesh &mesh) const;
 
-		RV SetShaderValue(iddt name, float value);
-
-		RV SetShaderValue(iddt name, int value);
-
-		RV SetShaderValue(iddt name, float *value);
-
-		RV SetShaderValue(iddt name, int *value);
-
-		RV SetShaderValue(iddt name, glm::vec2 &value);
-
-		RV SetShaderValue(iddt name, glm::vec3 &value);
-
-		RV SetShaderValue(iddt name, glm::vec4 &value);
-
-		RV SetShaderValue(iddt name, glm::mat2 &value);
-
-		RV SetShaderValue(iddt name, glm::mat3 &value);
-
-		RV SetShaderValue(iddt name, glm::mat4 &value);
-
+	private:
+#ifdef OPENGL
+		iddt program;
 #endif
 	};
 }

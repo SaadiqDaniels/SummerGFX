@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
 project(SummerGFX VERSION 0.0.1)
 
-# This prooject will target the C++17 standard
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/SDL2CMake")
+
+# This project will target the C++17 standard
 set(CMAKE_CXX_STANDARD 17)
 
 # Common compilation options to reduce bugs in code

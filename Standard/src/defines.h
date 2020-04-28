@@ -19,7 +19,11 @@ namespace operations {
 namespace operations::gfx {
 
 	// The identification data type (ID Data Type)
+#ifdef OPENGL
+	using iddt = unsigned int;
+#else
 	using iddt = unsigned long;
+#endif
 
 	// Default error value for iddt
 	const unsigned int invalid = -1;

@@ -11,6 +11,9 @@ find_package(GLEW REQUIRED)
 set(GFX_SOURCES
         src/extended_gfx.h
         src/extended_gfx.cpp
+        src/standard_interface.cpp
+        src/standard_mesh.cpp
+        src/standard_shader.cpp
 )
 
 # Creating the library itself
@@ -30,4 +33,4 @@ target_include_directories(GFX PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
 target_include_directories(GFX PRIVATE ${GLEW_INCLUDE_DIRS})
 
 # Linking to the standard headers in the shared folder
-target_link_libraries(GFX PRIVATE Standard ${GLEW_LIBRARIES} OpenGL::OpenGL)
+target_link_libraries(GFX PUBLIC Standard ${GLEW_LIBRARIES} OpenGL::OpenGL)

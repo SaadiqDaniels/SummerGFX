@@ -24,16 +24,6 @@ namespace operations::gfx {
 	RV Shutdown();
 
 	/*!
-	 * @brief Will swap the underlying shader being used by the graphics library
-	 * @param shader The shader to swap in
-	 * @return gfx_fail if the swap could not be executed,
-	 * data_fail if the shader provided was not able to be used.
-	 * In either scenario the old shader was not removed from use
-	 * @note If this function is called with a default constructed shader, t
-	 */
-	RV SwapShader(Shader &shader);
-
-	/*!
 	 * @brief Enables depth testing on the GPU
 	 * @return gfx_fail if the depth buffer could not be activated correctly
 	 */
@@ -46,24 +36,29 @@ namespace operations::gfx {
 	RV ClearDepthBuffer();
 
 	/*!
+	 * @brief Clears the color buffer (usually for the next frame)
+	 * @param r The red variable for the new frame (between 0 and 1)
+	 * @param g The green variable for the new frame (between 0 and 1)
+	 * @param b The blue variable for the new frame (between 0 and 1)
+	 * @return gfx_fail if the color buffer could not be cleared,
+	 * data_fail if r, g, or b was less than 0 ro greater than 1
+	 */
+	RV ClearColorBuffer(float r = 0.f, float g = 0.f, float b = 0.f);
+
+	/*!
 	 * @brief All functions and data in the forward namespace are used for forward rendering, instead of deferred
 	 * rendering
 	 */
 	namespace forward {
-		/*!
-		 * @brief Different ways to draw meshes on the gpu
-		 */
-		enum class DrawType {
-			Point, Line, Triangle, TriangleFan, TriangleStrip, Quad
-		};
 
 		/*!
 		 * @brief Draws a mesh to the gpu
 		 * @param mesh The mesh to draw
 		 * @param type The draw type to draw with
-		 * @return
+		 * @return data_fail if the shader, mesh, or type is invalid,
+		 * gfx_fail if the mesh could not be drawn
 		 */
-		RV Draw(Mesh &mesh, DrawType type);
+		RV Draw(Mesh &mesh);
 	}
 
 	/*!
