@@ -1,10 +1,16 @@
 cmake_minimum_required(VERSION 3.10)
 PROJECT(OpenGL VERSION 0.0.0 LANGUAGES CXX)
 
+#Find the opengl package from the user's computer
+find_package(OpenGL REQUIRED)
+
+#Find the glew package from the user's computer
+find_package(GLEW REQUIRED)
+
 # The source files for the opengl graphics library
 set(GFX_SOURCES
-        src/opengl_standard_gfx.h
-        src/opengl_standard_gfx.cpp
+        src/extended_gfx.h
+        src/extended_gfx.cpp
 )
 
 # Creating the library itself
@@ -17,8 +23,11 @@ target_compile_definitions(GFX PUBLIC OPENGL)
 target_compile_options(GFX PRIVATE
         ${GLOBAL_CXX_COMPILE_OPTIONS})
 
-# Linking to the standard headers in the shared folder
-target_link_libraries(GFX PRIVATE Standard)
-
 # Anything that uses this library will be using the sources folder in their include paths
 target_include_directories(GFX PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
+
+# Include the GLEW directories privately
+target_include_directories(GFX PRIVATE ${GLEW_INCLUDE_DIRS})
+
+# Linking to the standard headers in the shared folder
+target_link_libraries(GFX PRIVATE Standard ${GLEW_LIBRARIES} OpenGL::OpenGL)
