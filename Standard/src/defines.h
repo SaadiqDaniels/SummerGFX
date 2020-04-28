@@ -7,14 +7,16 @@
 #ifndef SUMMERGFX_DEFINES_H
 #define SUMMERGFX_DEFINES_H
 
-namespace operations::gfx {
-
+namespace operations {
 	/*!
-	 * @brief The return values for various graphics functions
+	 * @brief The return values for various operations functions
 	 */
 	enum class RV {
 		success = 0, data_fail, gfx_fail,
 	};
+}
+
+namespace operations::gfx {
 
 	// The identification data type (ID Data Type)
 	using iddt = unsigned long;
@@ -23,8 +25,6 @@ namespace operations::gfx {
 	const unsigned int invalid = -1;
 
 	// Forward declarations of all operations::gfx classes
-	class Interface;
-
 	class Camera;
 
 	class Font;
