@@ -9,6 +9,7 @@ set(GLOBAL_CXX_COMPILE_OPTIONS
         -Wall -Werror -Wextra -pedantic)
 
 # The standard graphics library interface
+add_subdirectory(glm)
 add_subdirectory(Standard)
 
 # Make sure to define -DGFX_TYPE as either OpenGL, Vulkan, DirectX12, or DirectX9
