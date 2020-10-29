@@ -26,7 +26,7 @@ namespace operations::gfx {
 		 * @brief The different types of arrays that can be bound
 		 */
 		enum class ArrayType {
-			position, face, normal, num
+			position, color, face, normal, num
 		};
 
 		/*!
@@ -87,7 +87,7 @@ namespace operations::gfx {
 	private:
 #ifdef OPENGL
 		iddt     vert_array;
-		iddt     buffers[static_cast<unsigned >(ArrayType::num)];
+		iddt     buffers[static_cast<unsigned>(ArrayType::num)];
 		unsigned face_count;
 		MeshType mtype;
 #endif

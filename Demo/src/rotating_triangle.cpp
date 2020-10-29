@@ -32,6 +32,7 @@ int main() {
 #endif
 		return 1;
 	}
+	operations::gfx::EnableDepthBuffer();
 
 	while (true)
 	{
@@ -51,6 +52,11 @@ int main() {
 				break;
 			}
 		}
+
+		operations::gfx::ClearDepthBuffer();
+		operations::gfx::ClearColorBuffer(.2f, 0.f, .2f);
+
+		// TODO: Draw triangle
 
 #ifdef OPENGL
 		SDL_GL_SwapWindow(window);

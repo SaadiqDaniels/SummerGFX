@@ -5,4 +5,4 @@ find_package(SDL2 REQUIRED)
 
 add_executable(rotating_triangle src/rotating_triangle.cpp)
 target_include_directories(rotating_triangle PRIVATE ${SDL2_INCLUDE_DIRS})
-target_link_libraries(rotating_triangle PRIVATE GFX ${SDL2_LIBRARIES})
+target_link_libraries(rotating_triangle PRIVATE GFX ${SDL2_LIBRARIES} ShaderUtils)

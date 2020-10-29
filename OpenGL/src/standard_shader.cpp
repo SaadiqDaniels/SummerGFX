@@ -13,18 +13,22 @@
 namespace operations::gfx {
 	Shader::Shader(const char *vertex, const char *fragment) : Shader() {
 
+		// If there is no vertex or fragment shader provided, the shader cannot be created
 		if (!vertex || !fragment)
 		{
 			std::cerr << "Either the vertex or fragment shader provided were nullptr" << std::endl;
 			return;
 		}
+		// A local variable to hold temporary results
 		GLint result;
 
+		// Create and compile the vertex shader
 		GLuint vert = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(vert, 1, &vertex, nullptr);
 		glCompileShader(vert);
 		glGetShaderiv(vert, GL_COMPILE_STATUS, &result);
 
+		// Check for failure and print results
 		if (result != GL_TRUE)
 		{
 			char buffer[1024] = {0};
@@ -32,11 +36,13 @@ namespace operations::gfx {
 			std::cerr << buffer << std::endl;
 		}
 
+		// Create and compile the fragment shader
 		GLuint frag = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(frag, 1, &fragment, nullptr);
 		glCompileShader(frag);
 		glGetShaderiv(frag, GL_COMPILE_STATUS, &result);
 
+		// Check for failure and print results
 		if (result != GL_TRUE)
 		{
 			char buffer[1024] = {0};
@@ -44,19 +50,24 @@ namespace operations::gfx {
 			std::cerr << buffer << std::endl;
 		}
 
+		// Create the glProgram, attach and delete the shaders
 		program = glCreateProgram();
 		glAttachShader(program, vert);
 		glAttachShader(program, frag);
 		glLinkProgram(program);
 		glGetProgramiv(program, GL_LINK_STATUS, &result);
 
+		// If the program could not be linked correctly, delete the program and print errors
 		if (result != GL_TRUE)
 		{
+			glDeleteProgram(program);
+			program = 0;
 			char buffer[1024] = {0};
 			glGetProgramInfoLog(program, sizeof(buffer), nullptr, buffer);
 			std::cerr << buffer << std::endl;
 		}
 
+		// Delete the temp vertex and fragment shaders
 		glDeleteShader(vert);
 		glDeleteShader(frag);
 	}
@@ -72,15 +83,17 @@ namespace operations::gfx {
 
 	Shader::~Shader() {
 
+		// If the program exists, delete it
 		if (program)
 		{
 			glUseProgram(0);
-			glDeleteProgram(0);
+			glDeleteProgram(program);
 		}
 	}
 
 	RV Shader::Use() {
 
+		// Use the shader program
 		if (program)
 		{
 			glUseProgram(program);
@@ -91,13 +104,15 @@ namespace operations::gfx {
 
 	RV Shader::Unuse() {
 
+		// Unuse the shader
 		glUseProgram(0);
 		return RV::success;
 	}
 
 	iddt Shader::FindShaderValue(const char *name) {
 
-		iddt rv(0);
+		iddt rv(invalid);
+		// If the shader exists, find the uniform value in the shader
 		if (program)
 		{
 			rv = glGetUniformLocation(program, name);
@@ -242,6 +257,17 @@ namespace operations::gfx {
 		{
 			glUseProgram(program);
 			glUniformMatrix4fv(name, 1, false, &value[0][0]);
+			return RV::success;
+		}
+		return RV::data_fail;
+	}
+
+	RV Shader::BindMesh(Mesh &mesh) const {
+
+		// TODO: Bind the mesh
+		if (program)
+		{
+			(void) mesh;
 			return RV::success;
 		}
 		return RV::data_fail;
